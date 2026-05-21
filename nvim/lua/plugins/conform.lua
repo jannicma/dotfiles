@@ -1,33 +1,40 @@
 return {
-  "stevearc/conform.nvim",
-  event = { "BufReadPre", "BufNewFile" },
-  config = function()
-    require("conform").setup({
-      -- Choose your formatters per filetype
-      formatters_by_ft = {
-        swift = { "swift_format" }, -- see custom formatter below
-        lua   = { "stylua" },
-        -- add more: javascript = { "prettier" }, etc.
-      },
+	{
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				"<leader>f",
+				function()
+					require("conform").format({ async = true, lsp_format = "fallback" })
+				end,
+				mode = { "n", "v" },
+				desc = "Format buffer",
+			},
+		},
+		opts = {
+			formatters_by_ft = {
+				swift = { "swift_format" },
+				lua = { "stylua" },
+			},
+			format_on_save = function(bufnr)
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
 
-      -- Format on save (sync, so errors show before write finishes)
-      format_on_save = function(bufnr)
-        -- Only enable if a formatter is available
-        return { lsp_fallback = true, timeout_ms = 2000 }
-      end,
-    })
-
-    -- Custom formatter definition for Apple's `swift-format` binary
-    local conform = require("conform")
-    conform.formatters.swift_format = {
-      command = "swift-format",    -- make sure it's on PATH (brew install swift-format)
-      args = { "--stdin" },        -- reads from stdin; add flags here if desired
-      stdin = true,
-    }
-
-    -- Manual mapping to format the entire buffer
-    vim.keymap.set("n", "<leader>f", function()
-      require("conform").format({ async = false, lsp_fallback = true })
-    end, { desc = "Format buffer" })
-  end,
+				return {
+					timeout_ms = 2000,
+					lsp_format = "fallback",
+				}
+			end,
+			formatters = {
+				swift_format = {
+					command = "swift-format",
+					args = { "format", "--in-place", "$FILENAME" },
+					stdin = false,
+				},
+			},
+		},
+	},
 }
