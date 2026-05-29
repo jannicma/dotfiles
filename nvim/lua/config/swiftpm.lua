@@ -10,6 +10,10 @@ local function has_package_manifest(dir)
 	return dir and uv.fs_stat(join(dir, "Package.swift")) ~= nil
 end
 
+local function current_dir()
+	return vim.fs.normalize(vim.fn.getcwd())
+end
+
 local function dirname(path)
 	return vim.fs.dirname(path)
 end
@@ -25,8 +29,8 @@ local function nearest_package_root(fname)
 	end
 end
 
-function M.root(fname)
-	local cwd = uv.cwd()
+function M.root_for_file(fname)
+	local cwd = current_dir()
 
 	if has_package_manifest(cwd) then
 		return cwd
@@ -35,8 +39,17 @@ function M.root(fname)
 	return nearest_package_root(fname)
 end
 
+function M.root(bufnr, on_dir)
+	local fname = vim.api.nvim_buf_get_name(bufnr)
+	local root = M.root_for_file(fname)
+
+	if root then
+		on_dir(root)
+	end
+end
+
 function M.workspace_dirs()
-	local cwd = uv.cwd()
+	local cwd = current_dir()
 
 	if not has_package_manifest(cwd) then
 		return { cwd }

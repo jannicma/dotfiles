@@ -14,6 +14,9 @@ return {
 			},
 		},
 		opts = {
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
 			formatters_by_ft = {
 				swift = { "swift_format" },
 				lua = { "stylua" },
@@ -31,8 +34,21 @@ return {
 			formatters = {
 				swift_format = {
 					command = "swift-format",
-					args = { "format", "--in-place", "$FILENAME" },
-					stdin = false,
+					args = {
+						"format",
+						"--configuration",
+						vim.json.encode({
+							indentation = {
+								spaces = 4,
+							},
+							tabWidth = 4,
+							version = 1,
+						}),
+						"--assume-filename",
+						"$FILENAME",
+						"-",
+					},
+					stdin = true,
 				},
 			},
 		},
