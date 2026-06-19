@@ -81,6 +81,7 @@ Treesitter parsers are not installed automatically during startup. After install
 - `<leader>ff`: find files
 - `<leader>fg`: live grep
 - `<leader>fb`: buffers
+- `<leader>fd`: diagnostics
 - `<leader>fr`: recent files
 - `<leader>gf`: Git files
 - `-`: open the directory containing the current file with Oil

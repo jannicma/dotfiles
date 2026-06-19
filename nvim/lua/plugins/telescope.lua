@@ -41,6 +41,13 @@ return {
 				desc = "Recent files",
 			},
 			{
+				"<leader>fd",
+				function()
+					require("telescope.builtin").diagnostics()
+				end,
+				desc = "Find diagnostics",
+			},
+			{
 				"<leader>gf",
 				function()
 					require("telescope.builtin").git_files()
