@@ -9,6 +9,7 @@ return {
 				{ "<leader>f", group = "find/format" },
 				{ "<leader>g", group = "git" },
 				{ "<leader>d", group = "diagnostics" },
+				{ "<leader>o", desc = "Open project directory" },
 				{ "<leader>r", group = "rename" },
 			},
 			icons = {

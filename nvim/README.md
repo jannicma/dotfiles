@@ -21,6 +21,7 @@ This is a small lazy.nvim configuration for terminal and tmux-first Swift develo
 - `gitsigns.nvim`: lightweight Git hunk signs and hunk preview.
 - `which-key.nvim`: shows available leader mappings without adding a UI framework.
 - `kanagawa.nvim`: restores the previous `kanagawa-wave` colorscheme.
+- `oil.nvim`: edits directories as normal buffers for adding, renaming, moving, and deleting files in deep trees.
 
 Telescope uses `plenary.nvim` as its required runtime dependency. Blink uses `blink.lib` as its required runtime dependency.
 
@@ -82,6 +83,8 @@ Treesitter parsers are not installed automatically during startup. After install
 - `<leader>fb`: buffers
 - `<leader>fr`: recent files
 - `<leader>gf`: Git files
+- `-`: open the directory containing the current file with Oil
+- `<leader>o`: open the project directory with Oil
 - `gd`: go to definition
 - `gr`: references
 - `<leader>rn`: rename symbol
@@ -90,4 +93,15 @@ Treesitter parsers are not installed automatically during startup. After install
 - `<leader>e`: line diagnostic
 - `<leader>f`: format buffer
 
-No file explorer, dashboard, terminal, AI assistant, or heavy UI plugin is included. Use tmux panes for servers, logs, tests, and external tools.
+## Oil File Operations
+
+Oil shows a directory as an editable buffer. Open it with `-` from a file or `<leader>o` from anywhere.
+
+- Add a file by typing a new filename on its own line, then save with `:w`.
+- Add a directory by ending the new name with `/`, then save with `:w`.
+- Rename a file by editing its name in place, then save with `:w`.
+- Move a file by editing its path, for example change `User.swift` to `Models/User.swift`, then save with `:w`.
+- Delete a file by deleting its line, then save with `:w`. Deletes go to trash.
+- Use `<CR>` to open an entry, `-` to go up, `_` to jump to the working directory, `g.` to toggle hidden files, and `q` to close Oil.
+
+No dashboard, terminal, AI assistant, or heavy UI plugin is included. Use tmux panes for servers, logs, tests, and external tools.
