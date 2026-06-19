@@ -45,7 +45,14 @@ return {
 				function()
 					require("telescope.builtin").diagnostics()
 				end,
-				desc = "Find diagnostics",
+				desc = "Find LSP diagnostics",
+			},
+			{
+				"<leader>fD",
+				function()
+					require("config.swift_build").run()
+				end,
+				desc = "Find build diagnostics",
 			},
 			{
 				"<leader>gf",

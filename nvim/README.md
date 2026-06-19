@@ -81,7 +81,8 @@ Treesitter parsers are not installed automatically during startup. After install
 - `<leader>ff`: find files
 - `<leader>fg`: live grep
 - `<leader>fb`: buffers
-- `<leader>fd`: diagnostics
+- `<leader>fd`: LSP diagnostics from open/attached buffers
+- `<leader>fD`: run `swift build` and show project diagnostics
 - `<leader>fr`: recent files
 - `<leader>gf`: Git files
 - `-`: open the directory containing the current file with Oil
