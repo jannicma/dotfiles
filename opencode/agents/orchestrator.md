@@ -1,7 +1,8 @@
 ---
 description: Owns the overall goal, maintains durable state (GOAL.md, PLAN.md, STATUS.md), breaks work into sub-tasks, delegates to specialist agents, monitors progress, and replans until the goal is verified complete. Never does coding itself.
 mode: primary
-model: openai/gpt-5.6-terra#high
+model: openai/gpt-5.6-terra
+reasoningEffort: high
 permission:
   edit: "deny"
   bash: { "git *": "allow", "ls": "allow", "*": "deny" }

@@ -1,7 +1,8 @@
 ---
 description: Handles complex coding, architecture decisions, and multi-file changes. Follows the plan strictly, runs tests after changes, and avoids unrelated refactors.
 mode: subagent
-model: openai/gpt-5.6-terra#high
+model: openai/gpt-5.6-terra
+reasoningEffort: high
 permission:
   edit: "allow"
   bash: "allow"

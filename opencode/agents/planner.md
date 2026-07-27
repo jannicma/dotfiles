@@ -1,7 +1,8 @@
 ---
 description: Creates detailed step-by-step plans with clear success criteria, identifies risks and dependencies, and prefers small testable increments. Does not implement code — only plans.
 mode: subagent
-model: openai/gpt-5.6-sol#xhigh
+model: openai/gpt-5.6-sol
+reasoningEffort: xhigh
 permission:
   edit: "deny"
   bash: "deny"
